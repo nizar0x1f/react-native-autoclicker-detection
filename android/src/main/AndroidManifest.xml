@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!--
+    Package visibility (Android 11+).
+
+    QUERY_ALL_PACKAGES is not an option here: Google Play only allows it for
+    apps whose core purpose is device search, antivirus, file management or
+    browsing, and rejects it when a narrower mechanism would do. Declaring the
+    packages explicitly makes exactly those packages visible with no runtime
+    prompt and no Play declaration.
+
+    Keep this list in sync with KnownAutomationPackages.PACKAGES.
+  -->
+  <queries>
+    <package android:name="com.truedevelopersstudio.automatictap.autoclicker" />
+    <package android:name="com.rise.automatic.autoclicker.clicker" />
+    <package android:name="autoclicker.clicker.autoclickerapp.autoclickerforgames" />
+    <package android:name="uit.quocnguyen.autoclickerlite" />
+    <package android:name="com.autoclicker.clicker" />
+    <package android:name="com.autoclicker.tapping.autoclick.clicker.clickerforgame" />
+  </queries>
+
+</manifest>

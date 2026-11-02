@@ -1,0 +1,10 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": [],
+    "paths": {
+      "react-native-autoclicker-detection": ["../src/index"]
+    }
+  },
+  "include": ["src", "index.js"]
+}
