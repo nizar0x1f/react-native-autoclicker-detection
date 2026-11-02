@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/react-native-autoclicker-detection.svg)](https://www.npmjs.com/package/react-native-autoclicker-detection)
 [![CI](https://github.com/nizar0x1f/react-native-autoclicker-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/nizar0x1f/react-native-autoclicker-detection/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/react-native-autoclicker-detection.svg)](./LICENSE)
+[![license](https://img.shields.io/npm/l/react-native-autoclicker-detection.svg)](https://github.com/nizar0x1f/react-native-autoclicker-detection/blob/main/LICENSE)
 
 Detect Android auto-clicker and automation apps from React Native.
 
@@ -337,14 +337,14 @@ services that can inject gestures are flagged.
 **The score changed after an app update**
 
 The scoring weights are part of the package version. Check the
-[changelog](./CHANGELOG.md) when upgrading.
+[changelog](https://github.com/nizar0x1f/react-native-autoclicker-detection/blob/main/CHANGELOG.md) when upgrading.
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for the development workflow and
-[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for community guidelines.
+See [CONTRIBUTING.md](https://github.com/nizar0x1f/react-native-autoclicker-detection/blob/main/CONTRIBUTING.md) for the development workflow and
+[CODE_OF_CONDUCT.md](https://github.com/nizar0x1f/react-native-autoclicker-detection/blob/main/CODE_OF_CONDUCT.md) for community guidelines.
 
-Security issues should be reported according to [SECURITY.md](./SECURITY.md).
+Security issues should be reported according to [SECURITY.md](https://github.com/nizar0x1f/react-native-autoclicker-detection/blob/main/SECURITY.md).
 
 ## License
 
