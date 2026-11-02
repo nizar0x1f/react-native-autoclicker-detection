@@ -8,24 +8,28 @@ import com.facebook.react.module.model.ReactModuleInfoProvider
 
 /** Registers the detection TurboModule with React Native. */
 class AutoclickerDetectionPackage : BaseReactPackage() {
-  override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-    return if (name == AutoclickerDetectionModule.NAME) {
+  override fun getModule(
+    name: String,
+    reactContext: ReactApplicationContext,
+  ): NativeModule? =
+    if (name == AutoclickerDetectionModule.NAME) {
       AutoclickerDetectionModule(reactContext)
     } else {
       null
     }
-  }
 
-  override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
-    mapOf(
-      AutoclickerDetectionModule.NAME to ReactModuleInfo(
-        name = AutoclickerDetectionModule.NAME,
-        className = AutoclickerDetectionModule.NAME,
-        canOverrideExistingModule = false,
-        needsEagerInit = false,
-        isCxxModule = false,
-        isTurboModule = true
+  override fun getReactModuleInfoProvider() =
+    ReactModuleInfoProvider {
+      mapOf(
+        AutoclickerDetectionModule.NAME to
+          ReactModuleInfo(
+            name = AutoclickerDetectionModule.NAME,
+            className = AutoclickerDetectionModule.NAME,
+            canOverrideExistingModule = false,
+            needsEagerInit = false,
+            isCxxModule = false,
+            isTurboModule = true,
+          ),
       )
-    )
-  }
+    }
 }

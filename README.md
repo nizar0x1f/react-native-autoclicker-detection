@@ -1,7 +1,6 @@
 # react-native-autoclicker-detection
 
 [![npm version](https://img.shields.io/npm/v/react-native-autoclicker-detection.svg)](https://www.npmjs.com/package/react-native-autoclicker-detection)
-[![CI](https://github.com/nizar0x1f/react-native-autoclicker-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/nizar0x1f/react-native-autoclicker-detection/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/react-native-autoclicker-detection.svg)](https://github.com/nizar0x1f/react-native-autoclicker-detection/blob/main/LICENSE)
 
 Detect Android auto-clicker and automation apps from React Native.
@@ -36,13 +35,13 @@ result.
 
 ## Requirements
 
-| Requirement | Version |
-| --- | --- |
-| React Native | 0.76 or newer (New Architecture, the default since 0.76) |
-| Android `minSdk` | 24 |
+| Requirement          | Version                                                                        |
+| -------------------- | ------------------------------------------------------------------------------ |
+| React Native         | 0.76 or newer (New Architecture, the default since 0.76)                       |
+| Android `minSdk`     | 24                                                                             |
 | Android `compileSdk` | 36 by default; follows the project-wide `compileSdkVersion` ext value when set |
-| iOS | No native detection; the module resolves to empty facts |
-| Expo | Development build or prebuild. Not supported in Expo Go |
+| iOS                  | No native detection; the module resolves to empty facts                        |
+| Expo                 | Development build or prebuild. Not supported in Expo Go                        |
 
 The package is developed and tested against React Native 0.88 and Expo SDK
 compatible with that release.
@@ -88,12 +87,12 @@ import { getReport } from 'react-native-autoclicker-detection';
 
 const report = await getReport();
 
-report.riskLevel;                   // 'none' | 'low' | 'medium' | 'high'
-report.score;                       // 0-100
-report.gestureCapablePackages;      // enabled services that can inject gestures
+report.riskLevel; // 'none' | 'low' | 'medium' | 'high'
+report.score; // 0-100
+report.gestureCapablePackages; // enabled services that can inject gestures
 report.installedAutomationPackages; // known auto-clicker apps that are installed
-report.environment;                 // { adbEnabled, rooted, emulator }
-report.reasons;                     // human readable explanation of the score
+report.environment; // { adbEnabled, rooted, emulator }
+report.reasons; // human readable explanation of the score
 ```
 
 An enabled accessibility service is also how screen readers work, so prefer
@@ -215,13 +214,13 @@ type ReportOptions = {
 
 ## Risk levels and scoring
 
-| Signal | Weight |
-| --- | --- |
+| Signal                                                                        | Weight                                         |
+| ----------------------------------------------------------------------------- | ---------------------------------------------- |
 | Enabled accessibility service that can inject gestures and is not allowlisted | 70 (+10 per additional package, capped at +20) |
-| Known automation package installed | 45 |
-| Rooted | 15 |
-| Emulator | 10 |
-| ADB enabled | 5 |
+| Known automation package installed                                            | 45                                             |
+| Rooted                                                                        | 15                                             |
+| Emulator                                                                      | 10                                             |
+| ADB enabled                                                                   | 5                                              |
 
 Scores are clamped to 0-100: `high` is 70 or more, `medium` 40 or more, `low` 15
 or more, everything else is `none`.
@@ -242,7 +241,10 @@ list to replace it, for example when your app ships its own accessibility
 service or runs under an MDM agent that has one:
 
 ```ts
-import { DEFAULT_ALLOWLIST, getReport } from 'react-native-autoclicker-detection';
+import {
+  DEFAULT_ALLOWLIST,
+  getReport,
+} from 'react-native-autoclicker-detection';
 
 const report = await getReport({
   allowlist: [...DEFAULT_ALLOWLIST, 'com.your.mdm.agent'],
@@ -254,7 +256,7 @@ flagged, so the list only needs to cover tools that can dispatch gestures.
 
 ## What this can and cannot see
 
-**It sees** every *enabled* accessibility service, via `AccessibilityManager`,
+**It sees** every _enabled_ accessibility service, via `AccessibilityManager`,
 cross-checked against `Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES`, and
 whether that service declares `CAPABILITY_CAN_PERFORM_GESTURES`.
 
@@ -282,22 +284,22 @@ out of scope for this package.
 
 ## Platform support
 
-| Platform | `isAvailable()` | Behaviour |
-| --- | --- | --- |
-| Android, app or development build | `true` | Full detection |
-| Android, Expo Go | `false` | Empty facts |
-| iOS | `false` | Empty facts; the native module is a no-op |
-| Web and other platforms | `false` | Empty facts |
+| Platform                          | `isAvailable()` | Behaviour                                 |
+| --------------------------------- | --------------- | ----------------------------------------- |
+| Android, app or development build | `true`          | Full detection                            |
+| Android, Expo Go                  | `false`         | Empty facts                               |
+| iOS                               | `false`         | Empty facts; the native module is a no-op |
+| Web and other platforms           | `false`         | Empty facts                               |
 
 ## Errors
 
 Native query failures reject the promise with one of the following codes:
 
-| Code | Function |
-| --- | --- |
+| Code                           | Function                            |
+| ------------------------------ | ----------------------------------- |
 | `E_ACCESSIBILITY_QUERY_FAILED` | `getEnabledAccessibilityServices()` |
-| `E_PACKAGE_QUERY_FAILED` | `getInstalledAutomationPackages()` |
-| `E_ENVIRONMENT_QUERY_FAILED` | `getEnvironment()` |
+| `E_PACKAGE_QUERY_FAILED`       | `getInstalledAutomationPackages()`  |
+| `E_ENVIRONMENT_QUERY_FAILED`   | `getEnvironment()`                  |
 
 `getReport()` rejects if any of its three queries rejects.
 

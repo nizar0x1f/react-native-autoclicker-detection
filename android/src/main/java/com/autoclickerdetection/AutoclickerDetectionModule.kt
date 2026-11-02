@@ -22,9 +22,9 @@ import java.io.File
  * rationale.
  */
 @Suppress("DEPRECATION")
-class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
-  NativeAutoclickerDetectionSpec(reactContext) {
-
+class AutoclickerDetectionModule(
+  reactContext: ReactApplicationContext,
+) : NativeAutoclickerDetectionSpec(reactContext) {
   override fun getEnabledAccessibilityServices(promise: Promise) {
     try {
       val context = reactApplicationContext
@@ -55,15 +55,16 @@ class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
 
       val result: WritableArray = Arguments.createArray()
       capabilities.forEach { (id, canPerformGestures) ->
-        val packageName = ComponentName.unflattenFromString(id)?.packageName
-          ?: id.substringBefore('/')
+        val packageName =
+          ComponentName.unflattenFromString(id)?.packageName
+            ?: id.substringBefore('/')
         result.pushMap(
           Arguments.createMap().apply {
             putString("componentName", id)
             putString("packageName", packageName)
             putString("label", appLabel(context, packageName))
             putBoolean("canPerformGestures", canPerformGestures)
-          }
+          },
         )
       }
 
@@ -104,7 +105,7 @@ class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
           putBoolean("adbEnabled", adbEnabled)
           putBoolean("rooted", isRooted())
           putBoolean("emulator", isEmulator())
-        }
+        },
       )
     } catch (error: Exception) {
       promise.reject(ERROR_ENVIRONMENT, error.message, error)
@@ -116,8 +117,7 @@ class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
    * (`pkg/.Service`), while `Settings.Secure` may store the fully qualified
    * class name. Normalising both keeps exactly one entry per service.
    */
-  private fun canonicalComponent(rawId: String): String =
-    ComponentName.unflattenFromString(rawId)?.flattenToString() ?: rawId
+  private fun canonicalComponent(rawId: String): String = ComponentName.unflattenFromString(rawId)?.flattenToString() ?: rawId
 
   private fun enabledServicesSetting(context: Context): String =
     try {
@@ -129,17 +129,24 @@ class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
       ""
     }
 
-  private fun appLabel(context: Context, packageName: String): String =
+  private fun appLabel(
+    context: Context,
+    packageName: String,
+  ): String =
     try {
       val packageManager = context.packageManager
-      packageManager.getApplicationLabel(
-        packageManager.getApplicationInfo(packageName, 0)
-      ).toString()
+      packageManager
+        .getApplicationLabel(
+          packageManager.getApplicationInfo(packageName, 0),
+        ).toString()
     } catch (error: Exception) {
       ""
     }
 
-  private fun isInstalled(packageManager: PackageManager, packageName: String): Boolean =
+  private fun isInstalled(
+    packageManager: PackageManager,
+    packageName: String,
+  ): Boolean =
     try {
       packageManager.getPackageInfo(packageName, 0)
       true
@@ -154,20 +161,21 @@ class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
       return true
     }
 
-    val markers = arrayOf(
-      "/system/bin/su",
-      "/system/xbin/su",
-      "/sbin/su",
-      "/system/sd/xbin/su",
-      "/system/bin/failsafe/su",
-      "/data/local/su",
-      "/data/local/bin/su",
-      "/data/local/xbin/su",
-      "/system/xbin/daemonsu",
-      "/su/bin/su",
-      "/system/app/Superuser.apk",
-      "/system/app/SuperSU.apk",
-    )
+    val markers =
+      arrayOf(
+        "/system/bin/su",
+        "/system/xbin/su",
+        "/sbin/su",
+        "/system/sd/xbin/su",
+        "/system/bin/failsafe/su",
+        "/data/local/su",
+        "/data/local/bin/su",
+        "/data/local/xbin/su",
+        "/system/xbin/daemonsu",
+        "/su/bin/su",
+        "/system/app/Superuser.apk",
+        "/system/app/SuperSU.apk",
+      )
 
     return markers.any { path -> File(path).exists() }
   }

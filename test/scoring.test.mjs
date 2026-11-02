@@ -225,7 +225,10 @@ describe('buildReport', () => {
     );
 
     assert.deepEqual(
-      report.enabledAccessibilityServices.map((s) => [s.packageName, s.allowed]),
+      report.enabledAccessibilityServices.map((s) => [
+        s.packageName,
+        s.allowed,
+      ]),
       [
         [allowlisted, true],
         ['com.example.clicker', false],
