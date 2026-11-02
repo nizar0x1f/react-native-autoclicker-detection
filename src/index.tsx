@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { DEFAULT_ALLOWLIST } from './lists';
 import NativeAutoclickerDetection from './NativeAutoclickerDetection';
 import { buildReport } from './scoring';
@@ -26,19 +28,21 @@ const EMPTY_ENVIRONMENT: AutomationEnvironment = {
 };
 
 /**
- * Whether the native module is linked in this build.
+ * Whether detection is available in this build and on this platform.
  *
- * Returns `false` in Expo Go, which cannot load custom native code. Every other
- * method stays callable and resolves to empty facts in that case, so guard your
- * logic with this instead of trusting a `riskLevel` of `none`.
+ * Returns `false` on iOS, on non-Android platforms, and in Expo Go, which cannot
+ * load custom native code. Every other method stays callable and resolves to
+ * empty facts in that case, so guard your logic with this instead of trusting a
+ * `riskLevel` of `none`.
  */
 export function isAvailable(): boolean {
-  return NativeAutoclickerDetection != null;
+  return Platform.OS === 'android' && NativeAutoclickerDetection != null;
 }
 
 /**
  * Accessibility services that are currently enabled, each annotated with
- * whether its package is in the allowlist.
+ * whether its package is in the allowlist. Resolves to an empty array on iOS and
+ * when the native module is not linked.
  */
 export async function getEnabledAccessibilityServices(
   options: ReportOptions = {}
@@ -58,7 +62,8 @@ export async function getEnabledAccessibilityServices(
  *
  * Only packages declared in the library manifest's `<queries>` element are
  * observable on Android 11+, because `QUERY_ALL_PACKAGES` is not permitted for
- * this use case by Google Play.
+ * this use case by Google Play. Resolves to an empty array on iOS and when the
+ * native module is not linked.
  */
 export function getInstalledAutomationPackages(): Promise<string[]> {
   return (
@@ -67,7 +72,10 @@ export function getInstalledAutomationPackages(): Promise<string[]> {
   );
 }
 
-/** Root / emulator / ADB state of the device. */
+/**
+ * Root, emulator and ADB state of the device. Resolves to all-false facts on
+ * iOS and when the native module is not linked.
+ */
 export function getEnvironment(): Promise<AutomationEnvironment> {
   return (
     NativeAutoclickerDetection?.getEnvironment() ??
@@ -82,6 +90,9 @@ export function getEnvironment(): Promise<AutomationEnvironment> {
  * Nothing is blocked or enforced here: an enabled accessibility service is also
  * how screen readers work, so treat the result as a risk signal and decide what
  * to do (log, step-up authentication, degrade features) in your app.
+ *
+ * Rejects if one of the native queries fails; see the error codes documented in
+ * the README.
  */
 export async function getReport(
   options: ReportOptions = {}

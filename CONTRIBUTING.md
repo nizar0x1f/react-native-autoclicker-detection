@@ -99,3 +99,12 @@ When you're sending a pull request:
 - Review the documentation to make sure it looks good.
 - Follow the pull request template when opening a pull request.
 - For pull requests that change the API or implementation, discuss with maintainers first by opening an issue.
+
+### Releasing
+
+1. Update `version` in `package.json` and add a matching entry to `CHANGELOG.md`.
+2. Run the full check suite: `yarn lint`, `yarn typecheck`, `yarn test`.
+3. Commit the version bump, then create and push a tag: `git tag v<version>` and `git push --tags`.
+4. Publish from the tagged commit with `npm publish` (or `yarn npm publish`).
+   The `prepare` script rebuilds `lib/` and `prepublishOnly` re-runs the checks,
+   so a publish cannot ship an unbuilt or unverified package.

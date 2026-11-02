@@ -1,4 +1,5 @@
-name: 🐛 Bug report
+# yamllint disable rule:line-length
+name: Bug report
 description: Report a reproducible bug or regression in this library.
 labels: [bug]
 body:
@@ -7,18 +8,16 @@ body:
       value: |
         # Bug report
 
-        👋 Hi!
-
-        **Please fill the following carefully before opening a new issue ❗**
-        *(Your issue may be closed if it doesn't provide the required pieces of information)*
+        Please fill in the details below. Issues without a reproduction are
+        difficult to act on and may be closed.
   - type: checkboxes
     attributes:
       label: Before submitting a new issue
-      description: Please perform simple checks first.
+      description: Please perform these checks first.
       options:
-        - label: I tested using the latest version of the library, as the bug might be already fixed.
+        - label: I tested using the latest version of the library, as the bug might already be fixed.
           required: true
-        - label: I tested using a [supported version](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md) of react native.
+        - label: I tested using a [supported version](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md) of React Native.
           required: true
         - label: I checked for possible duplicate issues, with possible answers.
           required: true
@@ -27,23 +26,23 @@ body:
     attributes:
       label: Bug summary
       description: |
-        Provide a clear and concise description of what the bug is.
-        If needed, you can also provide other samples: error messages / stack traces, screenshots, gifs, etc.
+        Provide a clear and concise description of the bug.
+        Include error messages, stack traces, screenshots or recordings if useful.
     validations:
       required: true
   - type: input
     id: library-version
     attributes:
       label: Library version
-      description: What version of the library are you using?
-      placeholder: "x.x.x"
+      description: Which version of the library are you using?
+      placeholder: "0.1.0"
     validations:
       required: true
   - type: textarea
     id: react-native-info
     attributes:
       label: Environment info
-      description: Run `react-native info` in your terminal and paste the results here.
+      description: Run `npx react-native info` and paste the results here.
       render: shell
     validations:
       required: true
@@ -51,17 +50,21 @@ body:
     id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
-      description: |
-        You must provide a clear list of steps and code to reproduce the problem.
+      description: Provide a clear list of steps and, where possible, sample code.
       value: |
-        1. …
-        2. …
+        1. ...
+        2. ...
     validations:
       required: true
   - type: input
     id: reproducible-example
     attributes:
-      label: Reproducible example repository 
-      description: Please provide a link to a repository on GitHub with a reproducible example.
+      label: Reproducible example repository
+      description: Link to a repository that reproduces the problem.
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+      description: What did you expect to happen?
     validations:
       required: true

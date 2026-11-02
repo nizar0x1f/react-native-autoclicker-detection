@@ -19,6 +19,7 @@
     "ios",
     "cpp",
     "*.podspec",
+    "CHANGELOG.md",
     "react-native.config.js",
     "!ios/build",
     "!android/build",
@@ -45,16 +46,19 @@
     "expo",
     "android",
     "autoclicker",
+    "auto-clicker",
     "automation",
     "accessibility",
-    "fraud-detection"
+    "fraud-detection",
+    "risk-detection",
+    "turbo-module"
   ],
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nizar0x1f/react-native-autoclicker-detection.git"
   },
-  "author": "nizar bamida <nizar.bamida@hightech.edu> (https://github.com/nizar0x1f)",
+  "author": "Nizar Bamida <nizar.bamida@hightech.edu> (https://github.com/nizar0x1f)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nizar0x1f/react-native-autoclicker-detection/issues"

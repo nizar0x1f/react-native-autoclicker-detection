@@ -32,8 +32,8 @@ export type AutoclickerReport = {
 export type ReportOptions = {
   /**
    * Packages that are expected to hold an accessibility service on this device
-   * (TalkBack, Voice Access, corporate MDM agents, ...). Defaults to
-   * {@link DEFAULT_ALLOWLIST}.
+   * (TalkBack, Voice Access, corporate MDM agents, ...). Replaces
+   * `DEFAULT_ALLOWLIST` for this call.
    */
-  allowlist?: string[];
+  allowlist?: readonly string[];
 };

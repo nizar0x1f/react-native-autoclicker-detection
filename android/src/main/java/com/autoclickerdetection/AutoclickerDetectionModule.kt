@@ -13,6 +13,14 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableArray
 import java.io.File
 
+/**
+ * Reads the signals used for automation risk scoring.
+ *
+ * Only data that is readable without a runtime permission is queried: enabled
+ * accessibility services and packages declared in this library's manifest
+ * `<queries>` element. See `AndroidManifest.xml` for the package visibility
+ * rationale.
+ */
 @Suppress("DEPRECATION")
 class AutoclickerDetectionModule(reactContext: ReactApplicationContext) :
   NativeAutoclickerDetectionSpec(reactContext) {

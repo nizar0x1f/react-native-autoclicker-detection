@@ -7,7 +7,7 @@
  * dispatch gestures. Extend it for corporate MDM agents or EUC tooling that
  * ships its own accessibility service.
  */
-export const DEFAULT_ALLOWLIST: string[] = [
+export const DEFAULT_ALLOWLIST: readonly string[] = [
   // TalkBack
   'com.google.android.marvin.talkback',
   // Switch Access

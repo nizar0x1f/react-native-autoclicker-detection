@@ -12,8 +12,8 @@ import type {
 
 /** Raw facts collected from the device, before any scoring. */
 export type AutoclickerFacts = {
-  enabledAccessibilityServices: NativeAccessibilityService[];
-  installedAutomationPackages: string[];
+  enabledAccessibilityServices: readonly NativeAccessibilityService[];
+  installedAutomationPackages: readonly string[];
   environment: NativeEnvironment;
 };
 
@@ -38,6 +38,10 @@ const THRESHOLDS: ReadonlyArray<[RiskLevel, number]> = [
   ['low', 15],
 ];
 
+/**
+ * Maps a 0-100 score to a risk level. Thresholds are part of the public
+ * contract and documented in the README.
+ */
 export function riskLevelForScore(score: number): RiskLevel {
   for (const [level, minimum] of THRESHOLDS) {
     if (score >= minimum) {
